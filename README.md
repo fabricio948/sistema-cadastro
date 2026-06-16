@@ -1,6 +1,6 @@
 # Cadastro
 
-Sistema de cadastro desenvolvido em **Java 21** aplicando os princípios da **Programação Orientada a Objetos (OOP)** e **Clean Architecture**.
+Sistema de cadastro de produtos desenvolvido em **Java 21** aplicando os princípios da **Programação Orientada a Objetos (OOP)**, **Clean Architecture** e **SOLID**.
 
 ## 🚀 Tecnologias
 
@@ -14,18 +14,27 @@ O projeto segue os princípios **SOLID** e **Clean Architecture**, organizado na
 
 ```
 src/main/java/com/sistema/cadastro/
-├── domain/          # Entidades, enums, DTOs e regras de negócio
-├── infrastructure/  # Persistência e integrações externas
-├── presentation/    # Interfaces com o usuário
-└── usecases/        # Casos de uso e portas da aplicação
+├── domain/              # Entidades, enums e regras de negócio
+│   ├── entities/        # Records e entidades puras
+│   └── enums/           # Enums com lógica encapsulada
+├── infrastructure/      # Persistência e integrações externas
+│   └── database/        # Implementação do repositório em memória
+├── presentation/        # Interfaces com o usuário
+│   ├── controller/      # Controlador que orquestra as operações
+│   └── menu/            # Menu interativo no console
+└── usecases/            # Casos de uso e portas da aplicação
+    ├── ports/           # Interfaces (portas) de repositório
+    └── product/         # Implementação dos casos de uso
 ```
 
 ## 🧱 Princípios OOP Aplicados
 
-- **Encapsulamento** — Atributos privados com acesso controlado via getters
-- **Herança** — Reuso de comportamento entre entidades
-- **Polimorfismo** — Métodos que se comportam de forma diferente conforme o contexto
-- **Abstração** — Interfaces e classes abstratas para desacoplamento
+- **Encapsulamento** — Atributos privados com acesso controlado via métodos
+- **Polimorfismo** — Enum `TaxaTipo` com método `calcularImposto()` polimórfico
+- **Abstração** — Interface `ProdutoRepository` para desacoplamento
+- **Injeção de Dependência** — Dependências injetadas manualmente via construtor
+- **Repository Pattern** — Abstração de acesso a dados
+- **Strategy Pattern** — `TaxaTipo` implementa estratégias de cálculo de imposto
 
 ## 📋 Pré-requisitos
 
@@ -41,6 +50,21 @@ mvn clean compile
 # Executar os testes
 mvn test
 
-# Empacotar o projeto
+# Executar a aplicação via Maven
+mvn exec:java -Dexec.mainClass="com.sistema.cadastro.CadastroApplication"
+
+# Ou compilar e executar diretamente
 mvn clean package
+java -jar target/cadastro-0.0.1-SNAPSHOT.jar
 ```
+
+## 🧪 Funcionalidades
+
+- **Cadastrar Produto** — Nome, descrição, preço base e tipo de taxa (BASIC, MEDIA, ALTA)
+- **Listar Produtos** — Exibe todos os produtos cadastrados com cálculo de imposto e preço final
+- **Cálculo de Imposto** — Taxa BASIC (3.0%), MEDIA (8.5%), ALTA (10.5%)
+
+## 📁 Estrutura de Governança
+
+- `.clinerules` — Constituição do projeto com regras de desenvolvimento
+- `.cline/` — Memory Bank com documentação do projeto
