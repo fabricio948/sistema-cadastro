@@ -3,6 +3,7 @@
 ![Java](https://img.shields.io/badge/Java-21-%23ED8B00?logo=openjdk&logoColor=white)
 ![Maven](https://img.shields.io/badge/Maven-3.9+-C71A36?logo=apache-maven&logoColor=white)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Tests](https://img.shields.io/badge/tests-30%20passed-brightgreen)
 
 > **Java Puro com Orientação a Objetos e recursos modernos do Java 21 — sem frameworks!**
 
@@ -161,6 +162,42 @@ java -jar target/cadastro-0.0.1-SNAPSHOT.jar
 | **Cadastrar Produto** | Nome, descrição, preço base e tipo de taxa |
 | **Listar Produtos** | Exibe todos os produtos com imposto e preço final |
 | **Cálculo de Imposto** | BASIC (3.0%), MEDIA (8.5%), ALTA (10.5%) |
+
+---
+
+## 🧪 Testes Unitários
+
+O projeto possui **30 testes unitários** com **100% de aprovação**, cobrindo todas as camadas da aplicação:
+
+| Camada | Classe de Teste | Testes | Cobertura |
+|--------|----------------|--------|-----------|
+| **Domain** | `TaxaTipoTest` | 5 | Strategy Pattern, cálculo de impostos |
+| **Domain** | `ProdutoRecordTest` | 6 | Record, imutabilidade, métodos de negócio |
+| **Infrastructure** | `ArrayListProdutoRepositoryTest` | 7 | Repository Pattern, CRUD em memória |
+| **Use Cases** | `CadastrarProdutoUseCaseTest` | 7 | Cadastro, validações, switch expressions |
+| **Use Cases** | `ListarProdutosUseCaseTest` | 4 | Listagem, Stream API |
+
+### Características dos Testes
+
+- ✅ **Java Puro** — Sem Mockito, mocks manuais implementando interfaces
+- ✅ **JUnit 5** — Assertions modernas e `@DisplayName` descritivos
+- ✅ **AAA Pattern** — Arrange-Act-Assert para clareza
+- ✅ **Dependency Inversion** — Testes isolados com injeção de dependência manual
+
+### Estrutura de Testes
+
+```
+src/test/java/com/sistema/cadastro/
+├── domain/
+│   ├── entities/ProdutoRecordTest.java
+│   └── enums/TaxaTipoTest.java
+├── infrastructure/
+│   └── database/ArrayListProdutoRepositoryTest.java
+└── usecases/
+    └── product/
+        ├── CadastrarProdutoUseCaseTest.java
+        └── ListarProdutosUseCaseTest.java
+```
 
 ---
 
